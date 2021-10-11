@@ -1,0 +1,12 @@
+---
+  - name: install sample application
+    hosts: all
+    become: yes
+
+    tasks:
+      - name: install mongodb
+        apt:
+          name: mongodb-server
+          state: present
+          update_cache: yes
+      - wait_for: host=192.168.1.10 port=27017 timeout=1
