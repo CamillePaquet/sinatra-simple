@@ -1,10 +1,8 @@
-defaults: &defaults
-  host: 192.168.1.10
+
 
 development:
-  <<: *defaults
-  database: mongoid_dev
-
-test:
-  <<: *defaults
-  database: mongoid_test
+  clients:
+    default:
+      database: database_test
+      hosts:
+        - 192.168.1.10

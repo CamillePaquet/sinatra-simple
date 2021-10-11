@@ -24,5 +24,5 @@ RUN mkdir /var/run/sshd
 
 RUN apt-get -y install openssh-client
 
-EXPOSE 22
+EXPOSE 22 80
 CMD ["/usr/sbin/sshd", "-D"]
