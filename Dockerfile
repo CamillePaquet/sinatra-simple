@@ -5,7 +5,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update -y
 
-RUN apt-get install -y --no-install-recommends ssh sudo python
+RUN apt-get install -y --no-install-recommends ssh sudo python git ca-certificates
 
 
 RUN useradd --create-home -s /bin/bash vagrant

@@ -9,4 +9,24 @@
           name: mongodb-server
           state: present
           update_cache: yes
-      - wait_for: host=192.168.1.10 port=27017 timeout=1
+      - name: checkout sample application
+        git:
+          repo: 'https://github.com/CamillePaquet/sinatra-simple.git'
+          dest: /tmp/sinatra-simple
+      - name: install ruby requisites
+        apt:
+          name: "{{ item }}"
+          state: present
+        with_items:
+          - ruby
+          - ruby-bundler
+          - ruby-dev
+          - build-essential
+      - name: check user rights sinatra-simple
+        file:
+          path: /tmp/sinatra-simple
+          state: directory
+          mode: '0755'
+          owner: vagrant
+          group: vagrant
+          recurse: yes
