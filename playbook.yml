@@ -4,11 +4,6 @@
     become: yes
 
     tasks:
-      - name: install mongodb
-        apt:
-          name: mongodb-server
-          state: present
-          update_cache: yes
       - name: checkout sample application
         git:
           repo: 'https://github.com/CamillePaquet/sinatra-simple.git'

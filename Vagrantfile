@@ -19,6 +19,9 @@ Vagrant.configure("2") do |config|
      was.vm.provision "ansible" do |ansible|
        ansible.playbook = "playbook.yml"
      end
+     was.vm.synced_folder ".", "/tmp/test"
      was.vm.network "private_network", ip: "192.168.1.11"
    end
+
+
 end

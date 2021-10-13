@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'mongoid'
-require_relative 'models'
+require_relative 'models/init'
 Mongoid.load!(File.join(File.dirname(__FILE__), 'config', 'mongoid.yml'))
 class Sample < Sinatra::Base
 
