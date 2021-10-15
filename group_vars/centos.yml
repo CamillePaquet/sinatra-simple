@@ -1,0 +1,13 @@
+packages:
+  ruby:
+    - ruby
+    - rubygem-bundler
+    - ruby-devel
+    - make
+    - gcc
+    - gcc-c++
+    - kernel-devel
+  utilities:
+    - net-tools
+    - emacs-nox
+    - curl

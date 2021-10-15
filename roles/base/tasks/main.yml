@@ -1,0 +1,13 @@
+
+- name: install Ruby requisites
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ packages.ruby }}"
+
+
+- name: install Utilities
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ packages.utilities }}"

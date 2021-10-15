@@ -1,0 +1,17 @@
+
+- name: Update bundle for project
+  community.general.bundler:
+    state: latest
+    chdir: "{{ sinatra_path }}"
+
+- name: Getting process IDs for rackup
+  community.general.pids:
+    pattern: .*rackup.*
+  register: rackup
+
+
+- name: start rackup unless is already running
+  ansible.builtin.shell:
+    cmd: nohup rackup&
+    chdir: "{{ sinatra_path }}"
+  when: rackup.pids | length == 0

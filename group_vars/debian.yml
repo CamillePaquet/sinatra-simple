@@ -1,0 +1,10 @@
+packages:
+  ruby:
+    - ruby
+    - ruby-bundler
+    - ruby-dev
+    - build-essential
+  utilities:
+    - net-tools
+    - emacs-nox
+    - curl

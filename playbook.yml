@@ -1,27 +1,9 @@
 ---
-  - name: install sample application
-    hosts: all
-    become: yes
+- name: install sample application
+  hosts: all
+  become: true
 
-    tasks:
-      - name: checkout sample application
-        git:
-          repo: 'https://github.com/CamillePaquet/sinatra-simple.git'
-          dest: /tmp/sinatra-simple
-      - name: install ruby requisites
-        apt:
-          name: "{{ item }}"
-          state: present
-        with_items:
-          - ruby
-          - ruby-bundler
-          - ruby-dev
-          - build-essential
-      - name: check user rights sinatra-simple
-        file:
-          path: /tmp/sinatra-simple
-          state: directory
-          mode: '0755'
-          owner: vagrant
-          group: vagrant
-          recurse: yes
+  roles:
+    - role: base
+    - role: sinatra
+  
