@@ -78,6 +78,8 @@ Deployment environment must have Ansible 2.11.5+ and Vagrant 2.2.18+.
 4. Run `exit` to exit the was-centos container.
 5. Run `curl -v 'http://localhost:9003/'` to test if the forwarding on the host machine is ok.
 6. Run `vagrant ssh was-debian` to connect on was-centos container.
-7. Run `curl -v 'http://localhost:9292/'` to check if the application start and display "Hello world".
-8. Run `exit` to exit the was-debian container.
-9. Run `curl -v 'http://localhost:9002/'` to test if the forwarding on the host machine is ok.
+7. Run `cd /tmp/test`
+8. Run `rackup`
+9. Run `curl -v 'http://localhost:9292/'` to check if the application start and display "Hello world".
+10. Run `exit` to exit the was-debian container.
+11. Run `curl -v 'http://localhost:9002/'` to test if the forwarding on the host machine is ok.
