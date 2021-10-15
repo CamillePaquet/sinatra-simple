@@ -52,7 +52,7 @@ Vagrant.configure("2") do |config|
          ansible.extra_vars = {sinatra_path: MOUNT_POINT, load_sinatra: LOAD_SINATRA}
          ansible.groups = { "centos" => ["was-centos"]}
        end
-       was.vm.synced_folder ".", MOUNT_POINT, type: "rsync", rsync_exclude: "Gemfile.lock"
+       was.vm.synced_folder ".", MOUNT_POINT, type: "rsync", rsync__exclude: "Gemfile.lock"
        was.vm.network "private_network", ip: IP_WAS_CENTOS
        was.vm.network :forwarded_port, guest: WEB_GUEST_PORT, host: WEB_CENTOS_HOST_PORT
      end
