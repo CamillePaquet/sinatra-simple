@@ -27,12 +27,10 @@ Deployment environment must have Ansible 2.11.5+ and Vagrant 2.2.18+.
     - name: install sample application
       hosts: all
       become: true
-      tasks:
-        - include_role:
-            name: base
-        - include_role:
-            name: sinatra
-          when: "{{ load_sinatra == True }}"
+
+      roles:
+        - role: base
+        - role: sinatra
 
 ## Structure
 
