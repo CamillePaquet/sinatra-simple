@@ -1,12 +1,15 @@
 IP_BDD = "192.168.1.10"
 IP_WAS_DEBIAN = "192.168.1.11"
 IP_WAS_CENTOS = "192.168.1.12"
+IP_WAS_UBUNTU = "192.168.1.13"
 WEB_DEBIAN_HOST_PORT = 9002
 WEB_CENTOS_HOST_PORT = 9003
+WEB_UBUNTU_HOST_PORT = 9004
 WEB_GUEST_PORT = 9292
 MOUNT_POINT = "/tmp/test"
 RUN_CENTOS = true
 RUN_DEBIAN = true
+RUN_UBUNTU = true
 LOAD_SINATRA = true
 
 Vagrant.configure("2") do |config|
@@ -19,6 +22,25 @@ Vagrant.configure("2") do |config|
      bdd.vm.network "private_network", ip: IP_BDD
    end
 
+   if RUN_UBUNTU then
+     config.vm.define "was-ubuntu" do |was|
+       was.vm.provider "docker" do |d|
+         d.build_dir = "."
+         d.dockerfile = "Dockerfile_ubuntu"
+         d.remains_running = true
+         d.has_ssh = true
+       end
+       was.vm.hostname = "was-ubuntu"
+       was.vm.provision "ansible" do |ansible|
+         ansible.playbook = "playbook.yml"
+         ansible.extra_vars = {sinatra_path: MOUNT_POINT, load_sinatra: LOAD_SINATRA}
+         ansible.groups = { "ubuntu" => ["was-ubuntu"]}
+       end
+       was.vm.synced_folder ".", MOUNT_POINT
+       was.vm.network "private_network", ip: IP_WAS_UBUNTU
+       was.vm.network :forwarded_port, guest: WEB_GUEST_PORT, host: WEB_UBUNTU_HOST_PORT
+     end
+   end
    if RUN_DEBIAN then
      config.vm.define "was-debian" do |was|
        was.vm.provider "docker" do |d|
